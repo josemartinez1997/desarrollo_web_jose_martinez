@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <title>Formulario para informar nueva actividad</title>
+        <section>
+            <h1>Información del lugar</h1>
+            <form>
+                <table>
+                    <tr>
+                        <td><label for="region">Región:</label></td>
+                        <td><select name="region" id="region" required>
+                            <option value="">--Selecciona una región--</option>
+                    </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="comuna">Comuna:</label></td>
+                        <td><select name="comuna" id="comuna" required>
+                            <option value="">--Selecciona una comuna--</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td><label for="sector">Sector:</label></td>
+                        <td><input name="sector" id="sector" size="75" maxlength="100">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+
+        <section>
+            <h1>Datos del organizador</h1>
+                <form>
+                    <table>
+                        <tr>
+                            <td><label for="nombre">Nombre organizador:</label></td>
+                            <td><input name="nombre" id="nombre" size="75" maxlength="200" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">E-mail:</label></td>
+                            <td><input name="email" id="email" type="email" size="75" maxlength="100" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="celular">Número de celular:</label></td>
+                            <td><input name="celular" id="celular" type="tel" size="75" maxlength="12"></td>
+                        </tr>
+                    </table>
+                </form>
+        </section>
+
+        <section>
+            <h1>Información de la actividad</h1>
+        </section>
+
+        <script>
+            import {region_comuna} from "./region_comuna.js"
+            const regionSelec = document.getElementById("region");
+            const comunaSelec = document.getElementById("comuna");
+
+            region_comuna.regiones.forEach(rn => {
+                var opcion = document.createElement("option");
+                opcion.value = rn.numero;
+                opcion.innerHTML = rn.nombre; 
+                regionSelec.appendChild(opcion);  
+            });
+            
+
+        </script>
+    </body>
+</html>
