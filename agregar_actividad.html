@@ -19,7 +19,6 @@
                     <tr>
                         <td><label for="comuna">Comuna:</label></td>
                         <td><select name="comuna" id="comuna" required>
-                            <option value="">--Selecciona una comuna--</option>
                             </select>
                         </td>
                     </tr>
@@ -154,12 +153,22 @@
                 opcion.textContent = rn.nombre; 
                 regionSelec.appendChild(opcion);  
             });
-            var numRegionSelec = 0;
-            regionSelec.addEventListener("change",function (){
-                var numRegionSelec = parseInt(this.value);
+            
+            function funcion(e){
+                const numRegionSelec = parseInt(e);
                 comunaSelec.innerHTML = '<option value="">--Selecciona una comuna--</option>';
-            })
-            const rn = region_comuna.regiones.find(r => r.numero == numRegionSelec);
+
+            }
+    
+            regionSelec.addEventListener("change",funcion(this.value));
+
+            function numSelect(region){
+                if(region.numero === numRegionSelec){
+                    return region
+                }
+                
+            }
+            const rn = region_comuna.regiones.find(numSelect);
             rn.comunas.forEach(comuna => {
                 const opcion = document.createElement("option");
                 opcion.value = comuna.id;
