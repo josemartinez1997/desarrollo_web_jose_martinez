@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <title>Actividad 1:</title>
+        <section>
+            <h1>Información del lugar</h1>
+            <table>
+                <tr>
+                    <td>Región:</td>
+                    <td>Región del Maule</td>
+                </tr>
+                <tr>
+                    <td>Comuna:</td>
+                    <td>Longaví</td>
+                </tr>
+                <tr>
+                    <td>Sector:</td>
+                    <td>Plaza de Longaví</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>Datos del organizador</h1>
+            <table>
+                <tr>
+                    <td>Nombre organizador:</td>
+                    <td>Municipalidad de Longaví</td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>municipalidaddelongavi@maule.cl</td>
+                </tr>
+                <tr>
+                    <td>Número de celular:</td>
+                    <td type="tel">+56948573283</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Contactar por:</td>
+                    <td>whatsapp:+56948573283</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Instagram:@municipalidaddelongavi</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>Horario y descripción del evento</h1>
+            <table>
+                <tr>
+                   <td>Día y hora de inicio:</td>
+                   <td><time datetime="2025-02-14T20:00">2025-02-14 20:00</time></td>
+                </tr>
+                <tr>
+                    <td>Día y hora de término:</td>
+                    <td><time datetime="2025-02-15T23:59">2025-02-15 23:59</time></td>
+                </tr>
+                <tr>
+                    <td>Descripción:</td>
+                    <td>El Festival Longaví Canta 2025 celebra sus 50 años de historia con tres noches inolvidables llenas de música, humor y cultura. El evento se llevará a cabo en el Estadio Municipal de Longaví, región del Maule, siendo el escenario más importante del centro sur de Chile.</td>
+                </tr>
+                <tr>
+                    <td>Tema:</td>
+                    <td>Festival cultural</td>
+                </tr>
+                <tr>
+                    <td>Fotos:</td>
+                    <td style="width:320px; height:240px;"><img src="https://www.fiestascostumbristas.cl/wp-content/uploads/2025/02/Longavi-Canta-50-anos.webp" alt="Imagen1" width="320px" height="240px" onclick="abrir(this.src)"></td>
+                    <td style="width:320px; height:240px;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyQDkT_jAs2e3ThSWgxPk9j4ZG6xZ2rSau5A&s" alt="Imagen2" width="320px" height="240px" onclick="abrir(this.src)"></td>
+                </tr>
+            </table>
+        </section>
+       
+        <script>
+            function abrir(url) {
+      // Abrimos una nueva ventana vacía
+      const ventana = window.open('', '_blank', 'width=820,height=640');
+
+      // Escribimos HTML en esa nueva ventana
+      ventana.document.write(`
+        <html>
+          <head>
+            <title>Imagen</title>
+            <style>
+              body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #111;
+              }
+              img {
+                width: 800px;
+                height: 600px;
+                box-shadow: 0 0 20px #000;
+                border-radius: 10px;
+              }
+            </style>
+          </head>
+          <body>
+            <img src="${url}" alt="Imagen ampliada">
+          </body>
+        </html>
+      `);
+
+      ventana.document.close(); // Cierra el flujo de escritura del documento
+    }
+          </script>  
+    </body>
+</html>

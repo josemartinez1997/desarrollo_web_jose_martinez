@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <title>Actividad 2:</title>
+        <section>
+            <h1>Información del lugar</h1>
+            <table>
+                <tr>
+                    <td>Región:</td>
+                    <td>Región Metropolitana de Santiago</td>
+                </tr>
+                <tr>
+                    <td>Comuna:</td>
+                    <td>Lo Barnechea</td>
+                </tr>
+                <tr>
+                    <td>Sector:</td>
+                    <td>Teatro Zoco</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>Datos del organizador</h1>
+            <table>
+                <tr>
+                    <td>Nombre organizador:</td>
+                    <td>Centro Artes Zoco</td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>info@zoco.art</td>
+                </tr>
+                <tr>
+                    <td>Número de celular:</td>
+                    <td type="tel">+56988194489</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Contactar por:</td>
+                    <td>whatsapp:+56988194489</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Instagram:@arteszoco</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>Horario y descripción del evento</h1>
+            <table>
+                <tr>
+                   <td>Día y hora de inicio:</td>
+                   <td><time datetime="2025-04-08T19:30">2025-04-08 19:30</time></td>
+                </tr>
+                <tr>
+                    <td>Día y hora de término:</td>
+                    <td><time datetime="2025-04-08T21:00">2025-04-08 21:00</time></td>
+                </tr>
+                <tr>
+                    <td>Descripción:</td>
+                    <td>Centro para las Artes Zoco tiene el orgullo de invitarlos a participar de una Clase Magistral dictada por el compositor, director, productor, académico y gestor cultural Carlos Zamora, quien a través de su historia personal nos llevará por un viaje introductorio a la música clásica.</td>
+                </tr>
+                <tr>
+                    <td>Tema:</td>
+                    <td>Clase Magistral</td>
+                </tr>
+                <tr>
+                    <td>Fotos:</td>
+                    <td style="width:320px; height:240px;"><img src="https://static.ptocdn.net/images/calugas/teatrozocov3_lg_calugalateral.webp" alt="Imagen1" width="320px" height="240px" onclick="abrir(this.src)"></td>
+                    <td style="width:320px; height:240px;"><img src="https://extension.usach.cl/wp-content/uploads/2019/05/IMG_98832-1024x974.jpg" alt="Imagen2" width="320px" height="240px" onclick="abrir(this.src)"></td>
+                    <td style="width:320px; height:240px;"><img src="https://static.ptocdn.net/images/eventos/zoc069_md.jpg" alt="Imagen2" width="320px" height="240px" onclick="abrir(this.src)"></td>
+                </tr>
+            </table>
+        </section>
+       
+        <script>
+            function abrir(url) {
+      // Abrimos una nueva ventana vacía
+      const ventana = window.open('', '_blank', 'width=820,height=640');
+
+      // Escribimos HTML en esa nueva ventana
+      ventana.document.write(`
+        <html>
+          <head>
+            <title>Imagen</title>
+            <style>
+              body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #111;
+              }
+              img {
+                width: 800px;
+                height: 600px;
+                box-shadow: 0 0 20px #000;
+                border-radius: 10px;
+              }
+            </style>
+          </head>
+          <body>
+            <img src="${url}" alt="Imagen ampliada">
+          </body>
+        </html>
+      `);
+
+      ventana.document.close(); // Cierra el flujo de escritura del documento
+    }
+          </script>  
+    </body>
+</html>
