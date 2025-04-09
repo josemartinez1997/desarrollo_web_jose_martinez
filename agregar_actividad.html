@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
+        <meta charset="UTF-8">
+        <title>Formulario para agregar actividades</title>
+        <style>
+            #inputOtro {
+                display: none;
+            }
+            #confirmacion {
+                display: none;
+            }
+            .error {
+      color: red;
+      font-size: 12px;
+    }
+        </style>
 
     </head>
     <body>
-        <title>Formulario para informar nueva actividad</title>
         <section>
             <h1>Información del lugar</h1>
             <form>
@@ -19,6 +32,7 @@
                     <tr>
                         <td><label for="comuna">Comuna:</label></td>
                         <td><select name="comuna" id="comuna" required>
+                            <option value="">--Selecciona una comuna--</option>
                             </select>
                         </td>
                     </tr>
@@ -50,20 +64,21 @@
                         </tr>
                         <tr>
                         <td><label for="celular">Número de celular:</label></td>
-                        <td><input name="celular" id="celular" type="tel" size="75" maxlength="12"></td>
+                        <td><input name="celular" id="celular" type="tel" size="75" maxlength="12" placeholder="+XXX.XXXXXXXX" oninput="validarCelular()"></td>
+                        <td><span id="celular_error" class="error"></span></td>
                         </tr>
                     <tr>
-                        <td><label for="">Contactar por:</label></td>
+                        <td><label for="whatsapp">Contactar por:</label></td>
                         <td><input type="checkbox" name="whatsapp" onclick="revisaCheck(this);"> Whatsapp
-                            <input id="whatsapp" type="text" name="whatsapp-id" style="display:none;"minlength="4" maxlength="50">
+                            <input id="whatsapp" type="text" name="whatsapp-id" style="display:none;" minlength="4" maxlength="50">
                             <input type="checkbox" name="instagram" onclick="revisaCheck(this);"> Instagram
                             <input id="instagram" type="text" name="instagram" style="display:none;" minlength="4" maxlength="50">
                             <input type="checkbox" name="telegram" onclick="revisaCheck(this);"> Telegram
-                            <input id="telegram" type="text" name="telegram-id" style="display:none;"minlength="4" maxlength="50">
+                            <input id="telegram" type="text" name="telegram-id" style="display:none;" minlength="4" maxlength="50">
                             <input type="checkbox" name="x" onclick="revisaCheck(this);"> X
-                            <input id="x" type="text" name="x-id" style="display:none;"minlength="4" maxlength="50">
+                            <input id="x" type="text" name="x-id" style="display:none;" minlength="4" maxlength="50">
                             <input type="checkbox" name="otro" onclick="revisaCheck(this);"> Otro
-                            <input id="otro" type="text" name="otro-id" style="display:none;"minlength="4" maxlength="50"></td>
+                            <input id="otro" type="text" name="otro-id" style="display:none;" minlength="4" maxlength="50"></td>
 
 
                     </tr>
@@ -73,9 +88,75 @@
 
         <section>
             <h1>Información de la actividad</h1>
+            <form>
+                <table>
+                    <tr>
+                        <td>Día y hora de inicio:</td>
+                        <td>
+                            <input id="inicio" type="datetime-local" oninput="validarFechas()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Día y hora de término:</td>
+                        <td>
+                            <input id="termino" type="datetime-local" oninput="validarFechas()">
+                        </td>
+                        <td><span id="fechaFeedback" style="color:red;"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Descripción:</td>
+                        <td>
+                            <textarea id="descripcion" cols="50" rows="10"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tema:</td>
+                        <td>
+                            <select id="tema" onchange="mostrarInput()">
+                                <option value="">-- Selecciona --</option>
+                                <option value="opcion1">Música</option>
+                                <option value="opcion2">Deporte</option>
+                                <option value="opcion3">Ciencias</option>
+                                <option value="opcion4">Religión</option>
+                                <option value="opcion5">Política</option>
+                                <option value="opcion6">Tecnología</option>
+                                <option value="opcion7">Juegos</option>
+                                <option value="opcion8">Baile</option>
+                                <option value="opcion9">Comida</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div id="inputOtro">
+                                <label for="otro-texto">Especifica:</label>
+                                <input type="text" id="otro-texto" name="otro-texto" placeholder="Ingresa tu opción" maxlength="15" minlength="3">
+                              </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fotos:</td>
+                        <td>
+                            <div id="input_container">
+                                <input type="file" id="fotos-0" name="fotos[]" accept="image/*"><br><br>
+                            </div>
+                            <p id="mensaje_fotos" style="color:red"></p>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+        <section>
+            <h2>Botón de confirmación</h2>
+                <button onclick="confirmarAgregar()">Agregar esta actividad</button>
+                <div id="confirmacion" class="confirmacion">
+                    <div class="mensaje">¿Estás seguro de que deseas agregar esta actividad?</div>
+                    <button onclick="agregarActividad()">Sí, agregar</button>
+                    <button onclick="cancelarAgregar()">No, cancelar</button>
+                  </div>
         </section>
 
         <script>
+            //Validación región y comuna
             let region_comuna = {
     "regiones": [
         {
@@ -144,50 +225,63 @@
         }
     ]
 };
-            const regionSelec = document.getElementById("region");
-            const comunaSelec = document.getElementById("comuna");
+            const regionSelect = document.getElementById("region");
+            const comunaSelect = document.getElementById("comuna");
 
             region_comuna.regiones.forEach(rn => {
                 const opcion = document.createElement("option");
                 opcion.value = rn.numero;
                 opcion.textContent = rn.nombre; 
-                regionSelec.appendChild(opcion);  
+                regionSelect.appendChild(opcion);  
             });
-            
-            function funcion(e){
-                const numRegionSelec = parseInt(e);
-                comunaSelec.innerHTML = '<option value="">--Selecciona una comuna--</option>';
 
-            }
-    
-            regionSelec.addEventListener("change",funcion(this.value));
+            regionSelect.addEventListener("change", function () {
+                const numeroSeleccionado = parseInt(this.value);
 
-            function numSelect(region){
-                if(region.numero === numRegionSelec){
-                    return region
+                // Limpiar comunas anteriores
+                comunaSelect.innerHTML = '<option value="">--Selecciona una comuna--</option>';
+                // Buscar la región correspondiente
+                const region = region_comuna.regiones.find(r => r.numero === numeroSeleccionado);
+
+                if (region && region.comunas) {
+                region.comunas.forEach(comuna => {
+                    const opcion = document.createElement("option");
+                    opcion.value = comuna.id;
+                    opcion.textContent = comuna.nombre;
+                    comunaSelect.appendChild(opcion);
+                });
                 }
-                
-            }
-            const rn = region_comuna.regiones.find(numSelect);
-            rn.comunas.forEach(comuna => {
-                const opcion = document.createElement("option");
-                opcion.value = comuna.id;
-                opcion.textContent = comuna.nombre;
-                comunaSelec.appendChild(opcion);
-
-            })
+                });
+            //Validación e-mail
 
             function validarEmail(){
                 const emailInput = document.getElementById("email");
                 const feedback = document.getElementById("emailFeedback");
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (emailRegex.text(emailInput)){
+                const valorEmail = emailInput.value.trim();
+                if (emailRegex.test(valorEmail)){
                     feedback.textContent = "";
                 }else{
                     feedback.textContent = "Por favor, ingrese un email valido"
                 }
             
             }
+            // Validación telefono
+            function validarCelular(){
+                const celularInput = document.getElementById("celular");
+                const mensajeError = document.getElementById("celular_error");
+                const telefonoRegex = /^\+?[1-9]\d{1,14}$/;
+                const valorCelular = celularInput.value.trim();
+
+                if (telefonoRegex.test(valorCelular)) {
+                    mensajeError.textContent = "";
+                } else {
+                    mensajeError.textContent = "Por favor, ingresa un número de teléfono válido.";
+                }
+        }
+
+
+
             function revisaCheck(element){
                 if (element.checked) {
                      document.getElementById(element.name).style.display = "block";
@@ -195,7 +289,122 @@
                     document.getElementById(element.name).style.display = "none";
                 }
             }
+           //Validación tema
+            function mostrarInput(){
+                const select = document.getElementById("tema")
+                const input = document.getElementById("inputOtro");
+                if (select.value ==="otro"){
+                    input.style.display = "block";
+                } else {
+                    input.style.display = "none";
+                    input.value = "";
+                }
+            }
+            //Validación fotos
 
+            document.addEventListener("DOMContentLoaded", function (){
+
+            let contador = 1;
+            const maxFotos = 5;
+            const input_container = document.getElementById("input_container");
+            const mensaje_fotos = document.getElementById("mensaje_fotos");
+
+            // Función que se ejecuta cuando se selecciona un archivo
+            function agregarInputFoto(event) {
+                const inputActual = event.target;
+
+                // Verifica si hay archivo cargado
+                if (inputActual.files.length > 0 && contador < maxFotos) {
+                    // Crear nuevo input
+                    const nuevoInput = document.createElement("input");
+                    nuevoInput.type = "file";
+                    nuevoInput.name = "fotos[]";
+                    nuevoInput.accept = "image/*";
+                    nuevoInput.id = `fotos-${contador}`;
+
+                    // Separación visual
+                    inputContainer.appendChild(document.createElement("br"));
+                    inputContainer.appendChild(document.createElement("br"));
+                    inputContainer.appendChild(nuevoInput);
+
+                    // Asignar evento al nuevo input
+                    nuevoInput.addEventListener("change", agregarInputFoto);
+
+                    contador++;
+            }
+
+            // Mostrar mensaje si se alcanza el límite
+            if (contador >= maxFotos) {
+                mensajeFotos.textContent = "Has alcanzado el límite de 5 fotos.";
+            } else {
+                mensajeFotos.textContent = "";
+            }
+            }
+
+            // Escuchar el primer input
+            document.getElementById("fotos-0").addEventListener("change", agregarInputFoto);
+        })
+
+            //Validación fecha
+            const fechaActual = new Date();
+    
+            // Formatear la fecha en el formato adecuado para el input datetime-local
+            const año = fechaActual.getFullYear();
+            const mes = String(fechaActual.getMonth() + 1).padStart(2, '0'); // Mes de 2 dígitos
+            const dia = String(fechaActual.getDate()).padStart(2, '0'); // Día de 2 dígitos
+            const horas = String(fechaActual.getHours()).padStart(2, '0'); // Horas de 2 dígitos
+            const minutos = String(fechaActual.getMinutes()).padStart(2, '0'); // Minutos de 2 dígitos
+
+            // Formatear la fecha y hora en el formato requerido por el input datetime-local
+            const fechaHoraFormateada = `${año}-${mes}-${dia}T${horas}:${minutos}`;
+
+            // Asignar la fecha y hora formateada al input
+            document.getElementById("inicio").value = fechaHoraFormateada;
+
+            function validarFechas() {
+                const inicio = document.getElementById("inicio").value;
+                const termino = document.getElementById("termino").value;
+                const feedback = document.getElementById("fechaFeedback");
+
+                if (!inicio || !termino) {
+                    feedback.textContent = ""; // no validar si están vacíos
+                    return;
+                }
+
+                const fechaInicio = new Date(inicio);
+                const fechaTermino = new Date(termino);
+
+                if (fechaTermino <= fechaInicio) {
+                    feedback.textContent = "La fecha de término debe ser posterior a la de inicio.";
+                } else {
+                    feedback.textContent = "";
+                }
+                }
+
+            //Boton de confirmación
+            function confirmarAgregar() {
+            // Mostrar el cuadro de confirmación personalizado
+            document.getElementById("confirmacion").style.display = "block";
+            }
+            
+
+            function agregarActividad() {
+            // Aquí puedes agregar la lógica para agregar la actividad
+            alert("Actividad agregada correctamente.");
+            cerrarConfirmacion();
+            window.location.href = "index.html";
+            }
+
+            function cancelarAgregar() {
+            alert("Actividad no agregada.");
+            cerrarConfirmacion();
+            }
+
+            function cerrarConfirmacion() {
+            // Ocultar el cuadro de confirmación
+            document.getElementById("confirmacion").style.display = "none";
+            }
+            
         </script>
     </body>
 </html>
