@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Actividad 3</title>
+    </head>
+    <body>
+        <section>
+            <h1>Información del lugar</h1>
+            <table>
+                <tr>
+                    <td>Región:</td>
+                    <td>Región del Biobío</td>
+                </tr>
+                <tr>
+                    <td>Comuna:</td>
+                    <td>Concepción</td>
+                </tr>
+                <tr>
+                    <td>Sector:</td>
+                    <td>Teatro Universidad de Concepción</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>Datos del organizador</h1>
+            <table>
+                <tr>
+                    <td>Nombre organizador:</td>
+                    <td>Parlantes Producciones Spa</td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>info@parlante.cl</td>
+                </tr>
+                <tr>
+                    <td>Número de celular:</td>
+                    <td>+569483828472</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Contactar por:</td>
+                    <td>X: @parlantesproducciones</td>
+                </tr>
+                <tr>
+                    <td>Instagram:@parlantesproducciones</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>Horario y descripción del evento</h1>
+            <table>
+                <tr>
+                   <td>Día y hora de inicio:</td>
+                   <td><time datetime="2025-05-03T20:30">2025-05-03 20:30</time></td>
+                </tr>
+                <tr>
+                    <td>Día y hora de término:</td>
+                    <td><time datetime="2025-05-03T22:30">2025-05-03 22:30</time></td>
+                </tr>
+                <tr>
+                    <td>Descripción:</td>
+                    <td> El Concierto Acústico de Los Jaivas se construye en base a un repertorio de temas que desde su origen nacieron en formato acústico y que muy rara vez se han interpretado en vivo, o que fueron estrenados por primera vez en este concierto, hace 10 años atrás</td>
+                </tr>
+                <tr>
+                    <td>Tema:</td>
+                    <td>Música</td>
+                </tr>
+                <tr>
+                    <td>Fotos:</td>
+                    <td style="width:320px; height:240px;"><img src="https://static.ptocdn.net/images/eventos/ppr019_calugalistado.jpg" alt="Imagen1" onclick="abrir(this.src)"></td>
+                    <td style="width:320px; height:240px;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJxgvWVCsH8CPlDrw35pp_2p6VG4Pt6HahYg&s" alt="Imagen2" onclick="abrir(this.src)"></td>
+                </tr>
+            </table>
+        </section>
+       
+        <script>
+            function abrir(url) {
+      // Abrimos una nueva ventana vacía
+      const ventana = window.open('', '_blank', 'width=820,height=640');
+
+      // Escribimos HTML en esa nueva ventana
+      ventana.document.write(`
+        <html>
+          <head>
+            <title>Imagen</title>
+            <style>
+              body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #111;
+              }
+              img {
+                width: 800px;
+                height: 600px;
+                box-shadow: 0 0 20px #000;
+                border-radius: 10px;
+              }
+            </style>
+          </head>
+          <body>
+            <img src="${url}" alt="Imagen ampliada">
+          </body>
+        </html>
+      `);
+
+      ventana.document.close(); // Cierra el flujo de escritura del documento
+    }
+          </script>  
+    </body>
+</html>

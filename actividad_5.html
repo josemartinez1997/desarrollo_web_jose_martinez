@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Actividad 5</title>
+    </head>
+    <body>
+        <section>
+            <h1>Información del lugar</h1>
+            <table>
+                <tr>
+                    <td>Región:</td>
+                    <td>Región del Libertador Bernardo Ohiggins</td>
+                </tr>
+                <tr>
+                    <td>Comuna:</td>
+                    <td>Mostazal</td>
+                </tr>
+                <tr>
+                    <td>Sector:</td>
+                    <td>Monticello Conference Center</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>Datos del organizador</h1>
+            <table>
+                <tr>
+                    <td>Nombre organizador:</td>
+                    <td>Dance Classic</td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>dance@classic.cl</td>
+                </tr>
+                <tr>
+                    <td>Número de celular:</td>
+                    <td>+56992798349</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Contactar por:</td>
+                    <td>whatsapp:+56992798344</td>
+                </tr>
+                <tr>
+                    <td>Instagram:@danceclassic</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>Horario y descripción del evento</h1>
+            <table>
+                <tr>
+                   <td>Día y hora de inicio:</td>
+                   <td><time datetime="2025-11-09T19:00">2025-11-09 19:00</time></td>
+                </tr>
+                <tr>
+                    <td>Día y hora de término:</td>
+                    <td><time datetime="1999-12-12T00:01"></time></td>
+                </tr>
+                <tr>
+                    <td>Descripción:</td>
+                    <td>DanceClassic Súper Nacional 25 es un MEGA-evento en donde se reúnen los mejores equipos dance de nuestro país, quienes buscan mostrar su trabajo y lograr obtener el primer lugar en cada una de las categorías en competencia. Te invitamos a ser parte de la fiesta del dance junto a quienes también disfrutan de la danza tanto como tú.</td>
+                </tr>
+                <tr>
+                    <td>Tema:</td>
+                    <td>Baile</td>
+                </tr>
+                <tr>
+                    <td>Fotos:</td>
+                    <td style="width:320px; height:240px;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjiFO6QEA29uqtBKjD45LrIOJ3APUWlzEeg&s" alt="Imagen1" onclick="abrir(this.src)"></td>
+                    <td style="width:320px; height:240px;"><img src="https://www.danceclassic.cl/public/assets/img/galeria/2.webp" alt="Imagen2" onclick="abrir(this.src)"></td>
+                </tr>
+            </table>
+        </section>
+       
+        <script>
+            function abrir(url) {
+      // Abrimos una nueva ventana vacía
+      const ventana = window.open('', '_blank', 'width=820,height=640');
+
+      // Escribimos HTML en esa nueva ventana
+      ventana.document.write(`
+        <html>
+          <head>
+            <title>Imagen</title>
+            <style>
+              body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #111;
+              }
+              img {
+                width: 800px;
+                height: 600px;
+                box-shadow: 0 0 20px #000;
+                border-radius: 10px;
+              }
+            </style>
+          </head>
+          <body>
+            <img src="${url}" alt="Imagen ampliada">
+          </body>
+        </html>
+      `);
+
+      ventana.document.close(); // Cierra el flujo de escritura del documento
+    }
+          </script>  
+    </body>
+</html>
