@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <h1>Bienvenido</h1>
+        <h2></h2>
+    </div>
+    <div class="button">
+        <a href="{{ url_for('agregar_actividad')}}">Agregar actividad</a>
+        <a href="{{ url_for('listado_actividades')}}">Listado de actividades</a>
+        <a href="{{ url_for('estadisticas')}}">Estadisticas</a>
+    </div>
+    <div id="act_list">
+        {% if data %}
+            {% for act in data %}
+
+    </div>
+</div>
